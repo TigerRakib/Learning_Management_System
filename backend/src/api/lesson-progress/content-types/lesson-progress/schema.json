@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lesson_progresses",
+  "info": {
+    "singularName": "lesson-progress",
+    "pluralName": "lesson-progresses",
+    "displayName": "LessonProgress"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "isCompleted": {
+      "type": "boolean"
+    },
+    "student": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "lesson_progresses"
+    },
+    "lesson": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::lesson.lesson",
+      "inversedBy": "lesson_progresses"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course",
+      "inversedBy": "lesson_progresses"
+    }
+  }
+}
