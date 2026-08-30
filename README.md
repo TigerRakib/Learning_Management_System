@@ -5,6 +5,21 @@ Learning management system built as two applications:
 - `frontend/` - Next.js application for the user interface
 - `backend/` - Strapi CMS/API backed by PostgreSQL
 
+## Architecture Overview
+
+### Backend Features
+- **Role-Based Access Control**: 4 roles (Admin, Content Manager, Instructor, Student)
+- **Ownership Enforcement**: Strict validation to prevent unauthorized access
+  - Instructors can only manage their own courses and lessons
+  - Students can only access their own progress and enrolled courses
+  - Admin/Content Manager can access all resources
+- **Draft Content**: Courses can be in draft/published states
+  - Only instructors and admins see draft courses
+  - Students only see published courses
+- **Content Types**: Blog, Course, Lesson, Quiz, Enrollment, Progress
+
+For detailed security documentation, see [backend/OWNERSHIP_ENFORCEMENT.md](backend/OWNERSHIP_ENFORCEMENT.md)
+
 ## Requirements
 
 - Node.js 20 or newer
@@ -76,6 +91,20 @@ npm run dev
 ```
 
 The frontend is available at [http://localhost:3000](http://localhost:3000).
+
+## Security
+
+This LMS implements comprehensive ownership enforcement:
+
+### What's Secured
+- ✅ **Course Management**: Only instructors can modify their own courses
+- ✅ **Lesson Access**: Students can only see lessons from enrolled courses
+- ✅ **Progress Tracking**: Students can only view/update their own progress
+- ✅ **Quiz Results**: Students cannot modify results after submission
+- ✅ **Enrollment**: Only admins can create/modify enrollments
+
+### Testing the Security
+See [backend/OWNERSHIP_ENFORCEMENT.md](backend/OWNERSHIP_ENFORCEMENT.md) for detailed testing scenarios.
 
 ## Useful Commands
 
